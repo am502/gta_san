@@ -2,6 +2,7 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
     private static final int WIDTH = 320;
@@ -31,7 +32,19 @@ public class Game extends Canvas implements Runnable {
 
     public void run() {
         while (isRunning) {
-            System.out.println("smth");
+            update();
+            render();
+        }
+    }
+
+    private void update() {
+    }
+
+    private void render() {
+        BufferStrategy bs = getBufferStrategy();
+        if (bs == null) {
+            createBufferStrategy(3);
+            return;
         }
     }
 
