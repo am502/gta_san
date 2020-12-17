@@ -70,17 +70,18 @@ public class Game extends Canvas implements Runnable {
         int frames = 0;
         int updates = 0;
 
+        // 1 000 000 000 / 64
+        long nanoSecondInOneTick = 15625000;
         long lastTime = System.nanoTime();
-        double nanoInOneTick = 1000000000.0 / 64.0;
-        double delta = 0;
+        long delta = 0;
         while (isRunning) {
             long now = System.nanoTime();
-            delta += (now - lastTime) / nanoInOneTick;
+            delta += now - lastTime;
             lastTime = now;
-            while (delta >= 1) {
+            while (delta >= nanoSecondInOneTick) {
                 update();
                 updates++;
-                delta--;
+                delta -= nanoSecondInOneTick;
             }
             render();
             frames++;
