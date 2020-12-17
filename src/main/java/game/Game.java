@@ -1,6 +1,6 @@
 package game;
 
-import screen.Screen;
+import graphic.Screen;
 
 import javax.swing.*;
 import java.awt.*;
