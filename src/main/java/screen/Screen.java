@@ -19,6 +19,14 @@ public class Screen {
         }
     }
 
+    public void clear() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                pixels[i][j] = 0;
+            }
+        }
+    }
+
     public int[][] getPixels() {
         return pixels;
     }

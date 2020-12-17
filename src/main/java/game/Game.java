@@ -9,10 +9,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
-    private static final int WIDTH = 320;
-    private static final int HEIGHT = WIDTH / 16 * 9;
-    private static final int SCALE = 4;
-
+    private int height;
+    private int width;
+    private int scaledHeight;
+    private int scaledWidth;
     private Thread thread;
     private JFrame frame;
     private boolean isRunning;
@@ -20,18 +20,22 @@ public class Game extends Canvas implements Runnable {
     private Screen screen;
 
     private BufferedImage image;
-    private int[] pixels;
+    private int[] imagePixels;
 
-    public Game() {
+    public Game(int height, int width, int scale) {
         isRunning = false;
+        this.height = height;
+        this.width = width;
+        this.scaledHeight = height * scale;
+        this.scaledWidth = width * scale;
         setSize();
         initFrame();
         initImage();
-        screen = new Screen(HEIGHT, WIDTH);
+        screen = new Screen(height, width);
     }
 
     private void setSize() {
-        Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
+        Dimension size = new Dimension(scaledWidth, scaledHeight);
         setPreferredSize(size);
     }
 
@@ -47,15 +51,15 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void initImage() {
-        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        imagePixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
-    private void fillPixels(int[][] pixels) {
+    private void fillImagePixels(int[][] pixels) {
         int index = 0;
         for (int i = 0; i < pixels.length; i++) {
             for (int j = 0; j < pixels[0].length; j++) {
-                this.pixels[index] = pixels[i][j];
+                imagePixels[index] = pixels[i][j];
                 index++;
             }
         }
@@ -78,11 +82,12 @@ public class Game extends Canvas implements Runnable {
             return;
         }
 
+        screen.clear();
         screen.render();
-        fillPixels(screen.getPixels());
+        fillImagePixels(screen.getPixels());
 
         Graphics g = bs.getDrawGraphics();
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
         g.dispose();
         bs.show();
     }
@@ -103,6 +108,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Game().start();
+        Game game = new Game(180, 320, 4);
+        game.start();
     }
 }
