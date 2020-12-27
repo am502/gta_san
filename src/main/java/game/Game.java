@@ -1,6 +1,7 @@
 package game;
 
 import graphic.Screen;
+import input.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,9 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning;
 
     private Screen screen;
+    private Keyboard keyboard;
+    private int iCurrent;
+    private int jCurrent;
 
     private BufferedImage image;
     private int[] imagePixels;
@@ -32,6 +36,10 @@ public class Game extends Canvas implements Runnable {
         initFrame();
         initImage();
         screen = new Screen(height, width);
+        keyboard = new Keyboard();
+        addKeyListener(keyboard);
+        this.iCurrent = 0;
+        this.jCurrent = 0;
     }
 
     private void setSize() {
@@ -96,6 +104,11 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void update() {
+        keyboard.update();
+        if (keyboard.isUp()) iCurrent--;
+        if (keyboard.isDown()) iCurrent++;
+        if (keyboard.isLeft()) jCurrent--;
+        if (keyboard.isRight()) jCurrent++;
     }
 
     private void render() {
@@ -106,7 +119,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-        screen.render();
+        screen.render(iCurrent, jCurrent);
         fillImagePixels(screen.getPixels());
 
         Graphics g = bs.getDrawGraphics();

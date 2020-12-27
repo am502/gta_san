@@ -1,12 +1,15 @@
 package graphic;
 
+import lombok.Getter;
 import util.Const;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+// from i = 0, j = 0 to i = 1080, j = 1920
 public class Screen {
     private int height;
     private int width;
+    @Getter
     private int[][] pixels;
     private int[][] tiles;
 
@@ -15,7 +18,7 @@ public class Screen {
         this.width = width;
         pixels = new int[height][width];
 
-        tiles = new int[Const.MAP_HEIGHT][Const.MAP_WIDTH];
+        tiles = new int[Const.MAP_SIZE_IN_TILES][Const.MAP_SIZE_IN_TILES];
         fillTilesWithRandom();
     }
 
@@ -27,10 +30,12 @@ public class Screen {
         }
     }
 
-    public void render() {
+    public void render(int iOffset, int jOffset) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                pixels[i][j] = tiles[i / Const.TILE_SIZE][j / Const.TILE_SIZE];
+                pixels[i][j] = tiles
+                        [((i + iOffset) / Const.TILE_SIZE_IN_PIXELS) & Const.MAP_SIZE_IN_TILES_MASK]
+                        [((j + jOffset) / Const.TILE_SIZE_IN_PIXELS) & Const.MAP_SIZE_IN_TILES_MASK];
             }
         }
     }
@@ -41,9 +46,5 @@ public class Screen {
                 pixels[i][j] = 0;
             }
         }
-    }
-
-    public int[][] getPixels() {
-        return pixels;
     }
 }
