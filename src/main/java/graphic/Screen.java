@@ -20,6 +20,14 @@ public class Screen {
 
         tiles = new int[Util.MAP_SIZE_IN_TILES][Util.MAP_SIZE_IN_TILES];
         fillTilesWithRandom();
+        fillTilesWithRandomSprite();
+    }
+
+    private void fillTilesWithRandomSprite() {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[0].length; j++) {
+            }
+        }
     }
 
     private void fillTilesWithRandom() {

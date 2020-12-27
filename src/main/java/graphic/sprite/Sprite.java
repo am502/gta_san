@@ -1,6 +1,11 @@
 package graphic.sprite;
 
+import util.Util;
+
 public class Sprite {
+    public static final Sprite RANDOM =
+            new Sprite(Util.TILE_SIZE_IN_PIXELS, 0, 3, SpriteSheet.WORLD_MAP_TILES);
+
     private int sizeInPixels;
     private int row;
     private int column;
