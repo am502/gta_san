@@ -2,6 +2,7 @@ package game;
 
 import graphic.Screen;
 import input.Keyboard;
+import util.Util;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,16 +64,6 @@ public class Game extends Canvas implements Runnable {
         imagePixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
-    private void fillImagePixels(int[][] pixels) {
-        int index = 0;
-        for (int i = 0; i < pixels.length; i++) {
-            for (int j = 0; j < pixels[0].length; j++) {
-                imagePixels[index] = pixels[i][j];
-                index++;
-            }
-        }
-    }
-
     public void run() {
         long lastTimeForPerSecond = System.currentTimeMillis();
         int frames = 0;
@@ -120,7 +111,7 @@ public class Game extends Canvas implements Runnable {
 
         screen.clear();
         screen.render(iCurrent, jCurrent);
-        fillImagePixels(screen.getPixels());
+        Util.convertFrom2dTo1d(screen.getPixels(), imagePixels);
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
