@@ -41,16 +41,6 @@ public class Screen {
         }
     }
 
-    public void renderRandom(int iOffset, int jOffset) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                pixels[i][j] = Sprite.RANDOM.getPixels()
-                        [(i + iOffset) & Util.TILE_SIZE_IN_PIXELS - 1]
-                        [(j + jOffset) & Util.TILE_SIZE_IN_PIXELS - 1];
-            }
-        }
-    }
-
     public void clear() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
