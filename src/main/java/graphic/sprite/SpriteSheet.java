@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class SpriteSheet {
     public static final SpriteSheet WORLD_MAP_TILES =
-            new SpriteSheet("/src/main/resources/spritesheet/world_map_tiles.png", 1, 1);
+            new SpriteSheet("/spritesheet/world_map_tiles.png", 1, 1);
 
     private String path;
     @Getter

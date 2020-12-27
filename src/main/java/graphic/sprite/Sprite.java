@@ -1,15 +1,18 @@
 package graphic.sprite;
 
+import lombok.Getter;
 import util.Util;
 
 public class Sprite {
     public static final Sprite RANDOM =
             new Sprite(Util.TILE_SIZE_IN_PIXELS, 0, 3, SpriteSheet.WORLD_MAP_TILES);
 
+    @Getter
     private int sizeInPixels;
     private int row;
     private int column;
     private SpriteSheet sheet;
+    @Getter
     private int[][] pixels;
 
     public Sprite(int sizeInPixels, int row, int column, SpriteSheet sheet) {

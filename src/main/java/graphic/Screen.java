@@ -1,5 +1,6 @@
 package graphic;
 
+import graphic.sprite.Sprite;
 import lombok.Getter;
 import util.Util;
 
@@ -20,14 +21,6 @@ public class Screen {
 
         tiles = new int[Util.MAP_SIZE_IN_TILES][Util.MAP_SIZE_IN_TILES];
         fillTilesWithRandom();
-        fillTilesWithRandomSprite();
-    }
-
-    private void fillTilesWithRandomSprite() {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[0].length; j++) {
-            }
-        }
     }
 
     private void fillTilesWithRandom() {
@@ -44,6 +37,16 @@ public class Screen {
                 pixels[i][j] = tiles
                         [((i + iOffset) / Util.TILE_SIZE_IN_PIXELS) & Util.MAP_SIZE_IN_TILES_MASK]
                         [((j + jOffset) / Util.TILE_SIZE_IN_PIXELS) & Util.MAP_SIZE_IN_TILES_MASK];
+            }
+        }
+    }
+
+    public void renderRandom(int iOffset, int jOffset) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                pixels[i][j] = Sprite.RANDOM.getPixels()
+                        [(i + iOffset) & Util.TILE_SIZE_IN_PIXELS - 1]
+                        [(j + jOffset) & Util.TILE_SIZE_IN_PIXELS - 1];
             }
         }
     }

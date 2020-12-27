@@ -135,7 +135,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        Game game = new Game(180, 320, 4);
+        Game game = new Game(180, 320, 5);
         game.start();
     }
 }
