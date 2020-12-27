@@ -1,6 +1,5 @@
 package graphic;
 
-import graphic.sprite.Sprite;
 import lombok.Getter;
 import util.Util;
 
