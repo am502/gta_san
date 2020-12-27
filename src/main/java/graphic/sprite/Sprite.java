@@ -13,6 +13,7 @@ public class Sprite {
         this.row = sheet.getPixelsBorder() + row * sizeInPixels + row * sheet.getPixelsBetween();
         this.column = sheet.getPixelsBorder() + column * sizeInPixels + column * sheet.getPixelsBetween();
         this.sheet = sheet;
+        load();
     }
 
     private void load() {
